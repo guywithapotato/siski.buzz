@@ -270,19 +270,18 @@ h1 {
 
 .result-card {
   width: min(100%, 1980px);
-  min-height: clamp(170px, 20vw, 240px);
-  display: flex;
+  min-height: 0;
+  display: grid;
   align-items: center;
   justify-content: center;
-  gap: clamp(1rem, 2.2vw, 2rem);
   margin: 0 auto 1rem;
   border: 4px dashed #ff1919;
-  padding: 1rem;
+  padding: clamp(1rem, 3vw, 2rem);
   background: #02024c;
 }
 
 .result-copy {
-  min-width: min(520px, 100%);
+  width: min(760px, 100%);
   color: #fff;
   font-size: clamp(1.3rem, 2.1vw, 2rem);
   font-weight: 900;
