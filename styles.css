@@ -107,6 +107,15 @@ h1 {
   text-shadow: 1px 1px 0 #f00, 2px 2px 0 rgba(0, 0, 0, 0.35);
 }
 
+.privacy-burp {
+  margin: -0.45rem 0 0;
+  color: #000;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.72rem;
+  font-weight: 900;
+  text-shadow: 1px 1px 0 rgba(255, 242, 0, 0.85);
+}
+
 .sponsor button {
   border: 0;
   background: transparent;

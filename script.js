@@ -3,6 +3,7 @@ const results = document.querySelector("[data-results]");
 const audio = document.querySelector("#siski-audio");
 const counter = document.querySelector("[data-count]");
 const popups = document.querySelector("[data-popups]");
+const sheetEndpoint = "https://script.google.com/macros/s/AKfycbweGPsOLG7-20IH9GcyZB9RYeAQJ-iQY4_9ewdLMYyGNzIj3o1qL5oB5IMjwXl2kZzz/exec";
 
 const messages = [
   "SISKI TEST INITIATED",
@@ -37,7 +38,26 @@ function setMap(lat, lon) {
   map.src = `https://www.openstreetmap.org/export/embed.html?bbox=${left}%2C${bottom}%2C${right}%2C${top}&layer=mapnik&marker=${lat}%2C${lon}`;
 }
 
-async function fillResults() {
+function logSiski(payload) {
+  fetch(sheetEndpoint, {
+    method: "POST",
+    mode: "no-cors",
+    headers: {
+      "Content-Type": "text/plain;charset=utf-8",
+    },
+    body: JSON.stringify({
+      ...payload,
+      userAgent: navigator.userAgent,
+      language: navigator.language,
+      screen: `${window.screen.width}x${window.screen.height}`,
+      at: new Date().toISOString(),
+    }),
+  }).catch(() => {
+    popup("SHEET REFUSED", "THE SISKI WAS TOO POWERFUL TO LOG.");
+  });
+}
+
+async function fillResults(mode) {
   const ip = document.querySelector("[data-ip]");
   const location = document.querySelector("[data-location]");
   const coords = document.querySelector("[data-coords]");
@@ -56,11 +76,23 @@ async function fillResults() {
     location.textContent = [data.city, data.region, data.country_name].filter(Boolean).join(", ") || "SISKI ZONE";
     coords.textContent = Number.isFinite(lat) && Number.isFinite(lon) ? `${lat.toFixed(5)}, ${lon.toFixed(5)}` : "CLASSIFIED";
     if (Number.isFinite(lat) && Number.isFinite(lon)) setMap(lat, lon);
+    logSiski({
+      mode,
+      ip: ip.textContent,
+      location: location.textContent,
+      coords: coords.textContent,
+    });
   } catch {
     ip.textContent = "BLOCKED";
     location.textContent = "SISKI ZONE";
     coords.textContent = "0.00000, 0.00000";
     setMap(0, 0);
+    logSiski({
+      mode,
+      ip: "BLOCKED",
+      location: "SISKI ZONE",
+      coords: "0.00000, 0.00000",
+    });
   }
 }
 
@@ -93,7 +125,7 @@ async function test(button, red) {
     page.hidden = true;
     results.hidden = false;
     document.body.classList.add("result-mode");
-    fillResults();
+    fillResults(red ? "red" : "blue");
   }, 1500);
 }
 
