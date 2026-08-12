@@ -5,173 +5,88 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       name="description"
-      content="siski.buzz is a small unstable website appliance for collecting buzzes, rumors, and other pixel-adjacent weather."
+      content="TEST UR SISKI: a cursed fake advertisement that reveals public IP/location data after you click."
     />
-    <title>siski.buzz - public buzz appliance</title>
+    <title>TEST UR SISKI NOW</title>
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <div class="static" aria-hidden="true"></div>
-    <div class="cursor-orbit" aria-hidden="true"></div>
+    <audio id="siski-audio" preload="auto" loop src="assets/siski-test.mp3"></audio>
 
-    <a class="skip-link" href="#console">Skip to the console</a>
+    <div class="scanlines" aria-hidden="true"></div>
+    <div class="floating-junk" aria-hidden="true">
+      <span>SISKI</span><span>FREE</span><span>NOW</span><span>WOW</span><span>ZIP</span>
+      <span>SAFE?</span><span>CLICK</span><span>2003</span><span>!!!</span>
+    </div>
 
-    <header class="topbar">
-      <a class="wordmark" href="./" aria-label="siski.buzz home">
-        <span class="sigil">s</span><span>siski.buzz</span>
-      </a>
-      <nav aria-label="Site zones">
-        <a href="#console">console</a>
-        <a href="#relics">relics</a>
-        <a href="#guestbook">guestbook</a>
-        <a href="archive.html">archive</a>
-      </nav>
-      <button class="sound-toggle" type="button" data-sound-toggle aria-pressed="false">
-        <span aria-hidden="true">◌</span>
-        <span>sound</span>
-      </button>
-    </header>
+    <main class="ad-page">
+      <div class="warning rail">
+        <span>⚠ WARNING WARNING YOU HAVE BEEN SELECTED ⚠ CLICK BELOW NOW OR LOSE FOREVER ⚠</span>
+      </div>
 
-    <main>
-      <section class="hero" aria-labelledby="title">
-        <div class="hero-copy">
-          <p class="eyebrow">unlicensed municipal buzz since 00:00</p>
-          <h1 id="title">siski.buzz</h1>
-          <p class="tagline">
-            A tiny public appliance for noises, fake warnings, reversible secrets,
-            and whatever your browser does after midnight.
-          </p>
-          <div class="hero-actions">
-            <button class="primary" type="button" data-buzz>
-              <span aria-hidden="true">✦</span>
-              request buzz
-            </button>
-            <button class="secondary" type="button" data-panic>
-              <span aria-hidden="true">!</span>
-              panic politely
-            </button>
-          </div>
-        </div>
+      <h1>DO YOU WANT TO TEST UR SISKI</h1>
 
-        <figure class="custodian-shell">
-          <img
-            src="assets/buzz-custodian.png"
-            width="1024"
-            height="1024"
-            alt="The Buzz Custodian, a smiling toy CRT monitor holding a glowing honeycomb chip."
-          />
-          <figcaption>
-            custodian online · antenna mood:
-            <strong data-mood>itchy</strong>
-          </figcaption>
-        </figure>
+      <p class="sponsor">
+        Sponsored by SiskiCorp™ | Certified 100% Maybe | Ad ID #SISKI-42069-XZ |
+        <button type="button" data-fake-link>Report this ad</button>
+      </p>
+
+      <section class="ad-box" aria-labelledby="ad-label">
+        <div id="ad-label" class="ad-label">ADVERTISEMENT</div>
+        <button class="test-button blue" type="button" data-test>
+          ↓ YES
+        </button>
+        <button class="test-button red" type="button" data-test-red>
+          ↓ YES BUT RED
+        </button>
+        <p class="panic">⚠ <span data-people>3</span> PEOPLE TESTED THEIR SISKI IN THE LAST MINUTE ⚠</p>
       </section>
 
-      <section class="ticker-zone" aria-label="Live nonsense ticker">
-        <div class="ticker" data-ticker>
-          <span>BUZZ TAX PAID</span>
-          <span>DO NOT FEED THE MARQUEE</span>
-          <span>PORT 404 SMELLS LIKE LEMONADE</span>
-          <span>LOCAL HIVE ACCEPTING VISITORS</span>
-          <span>TYPE SISKI IN THE CONSOLE</span>
+      <div class="rail bottom">
+        <span>100% FREE NO VIRUS TRUSTED BY 9 MILLION USERS</span>
+      </div>
+
+      <section class="result" data-result hidden aria-live="polite">
+        <div class="result-header">
+          <strong>SISKI TEST RESULTS</strong>
+          <button type="button" data-close>hide evidence</button>
         </div>
+        <div class="result-grid">
+          <div>
+            <span>public ip</span>
+            <strong data-ip>checking...</strong>
+          </div>
+          <div>
+            <span>geo vibe</span>
+            <strong data-geo>checking...</strong>
+          </div>
+          <div>
+            <span>isp aura</span>
+            <strong data-isp>checking...</strong>
+          </div>
+          <div>
+            <span>siski score</span>
+            <strong data-score>???</strong>
+          </div>
+        </div>
+        <p data-verdict>please remain seated while the siski calibrates</p>
       </section>
 
-      <section class="console-grid" id="console" aria-labelledby="console-title">
-        <div class="panel terminal-panel">
-          <div class="panel-title">
-            <h2 id="console-title">Buzz Console</h2>
-            <span data-clock>--:--:--</span>
-          </div>
-          <div class="terminal" data-terminal aria-live="polite">
-            <p><span>SYS</span> woke up under suspicious circumstances</p>
-            <p><span>TIP</span> try: help, buzz, omen, siski, secret, clear</p>
-          </div>
-          <form class="command-line" data-command-form autocomplete="off">
-            <label for="command">command</label>
-            <input id="command" name="command" spellcheck="false" placeholder="type help" />
-            <button type="submit">send</button>
-          </form>
-        </div>
-
-        <aside class="panel meter-panel" aria-labelledby="meter-title">
-          <div class="panel-title">
-            <h2 id="meter-title">Local Buzz Index</h2>
-            <span data-index>17%</span>
-          </div>
-          <div class="meter" aria-hidden="true">
-            <i data-needle></i>
-          </div>
-          <dl class="readouts">
-            <div><dt>visits here</dt><dd data-visits>1</dd></div>
-            <div><dt>buttons bothered</dt><dd data-bothers>0</dd></div>
-            <div><dt>secrets sniffed</dt><dd data-secrets>0</dd></div>
-          </dl>
-          <button class="wide-button" type="button" data-calibrate>calibrate vibes</button>
-        </aside>
-      </section>
-
-      <section class="relics" id="relics" aria-labelledby="relic-title">
-        <div class="section-head">
-          <p>clickable debris</p>
-          <h2 id="relic-title">Relics Recovered From The Domain</h2>
-        </div>
-        <div class="relic-grid">
-          <button class="relic" type="button" data-relic="modem">
-            <span class="relic-icon">56k</span>
-            <strong>Warm Modem</strong>
-            <small>Still negotiating with a rain cloud.</small>
-          </button>
-          <button class="relic" type="button" data-relic="jar">
-            <span class="relic-icon">!!!</span>
-            <strong>Jar of Alerts</strong>
-            <small>Shake gently for fake urgency.</small>
-          </button>
-          <button class="relic" type="button" data-relic="coupon">
-            <span class="relic-icon">¢</span>
-            <strong>One Weird Coupon</strong>
-            <small>Redeemable for seven invisible pixels.</small>
-          </button>
-          <a class="relic relic-link" href="hive.html">
-            <span class="relic-icon">?</span>
-            <strong>Unmarked Door</strong>
-            <small>It keeps being at the bottom of the page.</small>
-          </a>
-        </div>
-      </section>
-
-      <section class="guestbook panel" id="guestbook" aria-labelledby="guestbook-title">
-        <div class="panel-title">
-          <h2 id="guestbook-title">Guestbook That Pretends To Be A Database</h2>
-          <button type="button" data-export>export .buzz</button>
-        </div>
-        <form class="guest-form" data-guest-form>
-          <label for="guest-name">handle</label>
-          <input id="guest-name" name="name" maxlength="18" placeholder="visitor_404" />
-          <label for="guest-message">message</label>
-          <textarea id="guest-message" name="message" maxlength="100" placeholder="leave a harmless residue"></textarea>
-          <button type="submit">sign</button>
-        </form>
-        <ul class="guest-list" data-guest-list></ul>
-      </section>
-
-      <section class="buttons" aria-label="Suspicious controls">
-        <button type="button" data-mirror>mirror the page</button>
-        <button type="button" data-confetti>release pixels</button>
-        <button type="button" data-bad-idea>bad idea</button>
-        <a href="secret.html">definitely not secret</a>
+      <section class="microprint">
+        <p>
+          By clicking you agree to experience one loud local audio file and one public IP geolocation lookup.
+          No form, no account, no backend, just browser nonsense.
+        </p>
+        <nav aria-label="Secret pages">
+          <a href="archive.html">archive</a>
+          <a href="hive.html">hive</a>
+          <a href="secret.html">secret</a>
+        </nav>
       </section>
     </main>
 
-    <div class="toast-stack" data-toasts aria-live="polite"></div>
-
-    <template id="toast-template">
-      <div class="toast">
-        <strong></strong>
-        <p></p>
-      </div>
-    </template>
+    <div class="popups" data-popups aria-live="polite"></div>
 
     <script src="script.js"></script>
   </body>
