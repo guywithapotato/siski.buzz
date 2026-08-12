@@ -1,0 +1,139 @@
+:root {
+  color-scheme: dark;
+  --ink: #fff7c8;
+  --yellow: #fff12b;
+  --lime: #79ff39;
+  --pink: #ff4fd8;
+  --cyan: #48f4ff;
+  font-family: "Trebuchet MS", Verdana, system-ui, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  color: var(--ink);
+  background:
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.07) 0 1px, transparent 1px 5px),
+    radial-gradient(circle at 80% 20%, rgba(255, 79, 216, 0.35), transparent 25%),
+    #050505;
+}
+
+body.hive {
+  background:
+    linear-gradient(30deg, rgba(255, 241, 43, 0.1) 12%, transparent 12% 88%, rgba(255, 241, 43, 0.1) 88%),
+    linear-gradient(150deg, rgba(121, 255, 57, 0.1) 12%, transparent 12% 88%, rgba(121, 255, 57, 0.1) 88%),
+    #090900;
+}
+
+body.secret {
+  background:
+    radial-gradient(circle at center, rgba(72, 244, 255, 0.25), transparent 34%),
+    repeating-conic-gradient(from 0deg, #080808 0 12deg, #130018 12deg 24deg);
+}
+
+.page {
+  width: min(880px, calc(100% - 2rem));
+  margin: 0 auto;
+  padding: clamp(2rem, 8vw, 6rem) 0;
+}
+
+a,
+button {
+  color: inherit;
+  border: 2px solid var(--yellow);
+  background: #050505;
+  box-shadow: 4px 4px 0 rgba(72, 244, 255, 0.35);
+  padding: 0.65rem 0.8rem;
+  text-decoration: none;
+  font: inherit;
+}
+
+a:hover,
+button:hover {
+  background: var(--yellow);
+  color: #050505;
+}
+
+h1 {
+  margin: 2rem 0 1rem;
+  font-family: Impact, "Arial Black", sans-serif;
+  font-size: clamp(3.5rem, 14vw, 8rem);
+  line-height: 0.85;
+  color: var(--yellow);
+  text-shadow: 4px 0 var(--pink), -4px 0 var(--cyan);
+}
+
+.lede {
+  font-size: clamp(1.1rem, 2.4vw, 1.5rem);
+  line-height: 1.45;
+}
+
+.archive {
+  display: grid;
+  gap: 0.8rem;
+  padding: 0;
+  list-style: none;
+}
+
+.archive li {
+  display: grid;
+  grid-template-columns: 8.5rem 1fr;
+  gap: 1rem;
+  border: 2px dashed rgba(121, 255, 57, 0.7);
+  background: rgba(0, 0, 0, 0.72);
+  padding: 1rem;
+}
+
+time {
+  color: var(--lime);
+  font-weight: 900;
+}
+
+.stamp {
+  display: inline-block;
+  margin-top: 2rem;
+  transform: rotate(-8deg);
+}
+
+.hexes {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.hexes button {
+  min-height: 8rem;
+  clip-path: polygon(25% 5%, 75% 5%, 100% 50%, 75% 95%, 25% 95%, 0 50%);
+  background: rgba(255, 241, 43, 0.12);
+}
+
+.awake .hexes button {
+  animation: blink 600ms infinite alternate;
+}
+
+.fine {
+  color: var(--lime);
+}
+
+strong {
+  color: var(--lime);
+}
+
+@keyframes blink {
+  to {
+    filter: hue-rotate(130deg);
+    transform: translateY(-5px);
+  }
+}
+
+@media (max-width: 650px) {
+  .archive li,
+  .hexes {
+    grid-template-columns: 1fr;
+  }
+}

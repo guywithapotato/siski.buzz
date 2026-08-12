@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="siski.buzz is a small unstable website appliance for collecting buzzes, rumors, and other pixel-adjacent weather."
+    />
+    <title>siski.buzz - public buzz appliance</title>
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="static" aria-hidden="true"></div>
+    <div class="cursor-orbit" aria-hidden="true"></div>
+
+    <a class="skip-link" href="#console">Skip to the console</a>
+
+    <header class="topbar">
+      <a class="wordmark" href="./" aria-label="siski.buzz home">
+        <span class="sigil">s</span><span>siski.buzz</span>
+      </a>
+      <nav aria-label="Site zones">
+        <a href="#console">console</a>
+        <a href="#relics">relics</a>
+        <a href="#guestbook">guestbook</a>
+        <a href="archive.html">archive</a>
+      </nav>
+      <button class="sound-toggle" type="button" data-sound-toggle aria-pressed="false">
+        <span aria-hidden="true">◌</span>
+        <span>sound</span>
+      </button>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="title">
+        <div class="hero-copy">
+          <p class="eyebrow">unlicensed municipal buzz since 00:00</p>
+          <h1 id="title">siski.buzz</h1>
+          <p class="tagline">
+            A tiny public appliance for noises, fake warnings, reversible secrets,
+            and whatever your browser does after midnight.
+          </p>
+          <div class="hero-actions">
+            <button class="primary" type="button" data-buzz>
+              <span aria-hidden="true">✦</span>
+              request buzz
+            </button>
+            <button class="secondary" type="button" data-panic>
+              <span aria-hidden="true">!</span>
+              panic politely
+            </button>
+          </div>
+        </div>
+
+        <figure class="custodian-shell">
+          <img
+            src="assets/buzz-custodian.png"
+            width="1024"
+            height="1024"
+            alt="The Buzz Custodian, a smiling toy CRT monitor holding a glowing honeycomb chip."
+          />
+          <figcaption>
+            custodian online · antenna mood:
+            <strong data-mood>itchy</strong>
+          </figcaption>
+        </figure>
+      </section>
+
+      <section class="ticker-zone" aria-label="Live nonsense ticker">
+        <div class="ticker" data-ticker>
+          <span>BUZZ TAX PAID</span>
+          <span>DO NOT FEED THE MARQUEE</span>
+          <span>PORT 404 SMELLS LIKE LEMONADE</span>
+          <span>LOCAL HIVE ACCEPTING VISITORS</span>
+          <span>TYPE SISKI IN THE CONSOLE</span>
+        </div>
+      </section>
+
+      <section class="console-grid" id="console" aria-labelledby="console-title">
+        <div class="panel terminal-panel">
+          <div class="panel-title">
+            <h2 id="console-title">Buzz Console</h2>
+            <span data-clock>--:--:--</span>
+          </div>
+          <div class="terminal" data-terminal aria-live="polite">
+            <p><span>SYS</span> woke up under suspicious circumstances</p>
+            <p><span>TIP</span> try: help, buzz, omen, siski, secret, clear</p>
+          </div>
+          <form class="command-line" data-command-form autocomplete="off">
+            <label for="command">command</label>
+            <input id="command" name="command" spellcheck="false" placeholder="type help" />
+            <button type="submit">send</button>
+          </form>
+        </div>
+
+        <aside class="panel meter-panel" aria-labelledby="meter-title">
+          <div class="panel-title">
+            <h2 id="meter-title">Local Buzz Index</h2>
+            <span data-index>17%</span>
+          </div>
+          <div class="meter" aria-hidden="true">
+            <i data-needle></i>
+          </div>
+          <dl class="readouts">
+            <div><dt>visits here</dt><dd data-visits>1</dd></div>
+            <div><dt>buttons bothered</dt><dd data-bothers>0</dd></div>
+            <div><dt>secrets sniffed</dt><dd data-secrets>0</dd></div>
+          </dl>
+          <button class="wide-button" type="button" data-calibrate>calibrate vibes</button>
+        </aside>
+      </section>
+
+      <section class="relics" id="relics" aria-labelledby="relic-title">
+        <div class="section-head">
+          <p>clickable debris</p>
+          <h2 id="relic-title">Relics Recovered From The Domain</h2>
+        </div>
+        <div class="relic-grid">
+          <button class="relic" type="button" data-relic="modem">
+            <span class="relic-icon">56k</span>
+            <strong>Warm Modem</strong>
+            <small>Still negotiating with a rain cloud.</small>
+          </button>
+          <button class="relic" type="button" data-relic="jar">
+            <span class="relic-icon">!!!</span>
+            <strong>Jar of Alerts</strong>
+            <small>Shake gently for fake urgency.</small>
+          </button>
+          <button class="relic" type="button" data-relic="coupon">
+            <span class="relic-icon">¢</span>
+            <strong>One Weird Coupon</strong>
+            <small>Redeemable for seven invisible pixels.</small>
+          </button>
+          <a class="relic relic-link" href="hive.html">
+            <span class="relic-icon">?</span>
+            <strong>Unmarked Door</strong>
+            <small>It keeps being at the bottom of the page.</small>
+          </a>
+        </div>
+      </section>
+
+      <section class="guestbook panel" id="guestbook" aria-labelledby="guestbook-title">
+        <div class="panel-title">
+          <h2 id="guestbook-title">Guestbook That Pretends To Be A Database</h2>
+          <button type="button" data-export>export .buzz</button>
+        </div>
+        <form class="guest-form" data-guest-form>
+          <label for="guest-name">handle</label>
+          <input id="guest-name" name="name" maxlength="18" placeholder="visitor_404" />
+          <label for="guest-message">message</label>
+          <textarea id="guest-message" name="message" maxlength="100" placeholder="leave a harmless residue"></textarea>
+          <button type="submit">sign</button>
+        </form>
+        <ul class="guest-list" data-guest-list></ul>
+      </section>
+
+      <section class="buttons" aria-label="Suspicious controls">
+        <button type="button" data-mirror>mirror the page</button>
+        <button type="button" data-confetti>release pixels</button>
+        <button type="button" data-bad-idea>bad idea</button>
+        <a href="secret.html">definitely not secret</a>
+      </section>
+    </main>
+
+    <div class="toast-stack" data-toasts aria-live="polite"></div>
+
+    <template id="toast-template">
+      <div class="toast">
+        <strong></strong>
+        <p></p>
+      </div>
+    </template>
+
+    <script src="script.js"></script>
+  </body>
+</html>
