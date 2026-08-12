@@ -67,7 +67,7 @@ async function fillResults() {
 async function test(button, red) {
   page.classList.add("testing");
   button.classList.add("testing");
-  button.textContent = red ? "↓ RED TESTING" : "↓ TESTING";
+  button.textContent = red ? "↓ RED SISKI TESTING" : "↓ SISKI TESTING";
   counter.textContent = random(8, 99);
 
   audio.loop = false;
@@ -89,7 +89,7 @@ async function test(button, red) {
   setTimeout(() => {
     page.classList.remove("testing");
     button.classList.remove("testing");
-    button.textContent = red ? "↓ YES BUT RED" : "↓ YES";
+    button.textContent = red ? "↓ TEST UR SISKI BUT RED" : "↓ TEST UR SISKI RN!!!111!1";
     page.hidden = true;
     results.hidden = false;
     document.body.classList.add("result-mode");
