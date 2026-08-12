@@ -129,7 +129,7 @@ h1 {
   font-size: 0.86rem;
 }
 
-.dingus-button {
+.siski-button {
   width: min(405px, 100%);
   min-height: clamp(4.45rem, 8vw, 5.55rem);
   border: 3px solid rgba(0, 0, 0, 0.28);
@@ -148,15 +148,15 @@ h1 {
     0 0 24px var(--yellow);
 }
 
-.dingus-button:hover,
-.dingus-button:focus-visible {
+.siski-button:hover,
+.siski-button:focus-visible {
   outline: 0;
   filter: saturate(1.45) contrast(1.12);
   transform: scale(1.035);
 }
 
-.dingus-button:active,
-.dingus-button.testing {
+.siski-button:active,
+.siski-button.testing {
   transform: translateY(5px) scale(1.01);
   box-shadow:
     inset 0 3px 0 rgba(255, 255, 255, 0.2),

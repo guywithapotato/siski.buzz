@@ -4,7 +4,7 @@ const counter = document.querySelector("[data-count]");
 const popups = document.querySelector("[data-popups]");
 
 const messages = [
-  "DINGUS TEST INITIATED",
+  "SISKI TEST INITIATED",
   "SISKI SUBSYSTEM WARM",
   "YOU ARE SELECTED",
   "NO VIRUS PROBABLY",
