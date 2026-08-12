@@ -8,9 +8,9 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <audio id="siski-audio" preload="auto" loop src="assets/siski-test.mp3"></audio>
+    <audio id="siski-audio" preload="auto" src="assets/siski-test.mp3"></audio>
 
-    <main class="page">
+    <main class="page" data-home>
       <div class="warning-bar">
         <span>⚠ WARNING WARNING YOU HAVE BEEN SELECTED ⚠ CLICK BELOW NOW OR LOSE FOREVER ⚠</span>
       </div>
@@ -39,6 +39,37 @@
       <div class="trust-bar">
         <span>100% FREE NO VIRUS TRUSTED BY 9 MILLION USERS</span>
       </div>
+    </main>
+
+    <main class="results" data-results hidden>
+      <h2>ANALYZING YOUR SISKI...</h2>
+
+      <p class="result-marquee">
+        RESULT: your ip and location have been found below, congratulations on your siski
+      </p>
+
+      <section class="result-card">
+        <img src="assets/buzz-custodian.png" alt="The siski analysis mascot." />
+        <div class="result-copy">
+          <p>IP: <span data-ip>CHECKING...</span></p>
+          <p>LOCATION: <span data-location>CHECKING...</span></p>
+          <p>COORDS: <span data-coords>CHECKING...</span></p>
+        </div>
+      </section>
+
+      <section class="map-wrap">
+        <iframe
+          data-map
+          title="Approximate public IP location map"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        ></iframe>
+      </section>
+
+      <p class="footer-ad">
+        Sponsored by SiskiCorp™ | Certified 100% Safe | Ad ID #48291-XZ |
+        <button type="button" data-report-results>Report this ad</button>
+      </p>
     </main>
 
     <div class="popup-layer" data-popups aria-live="polite"></div>

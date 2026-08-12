@@ -1,4 +1,5 @@
 const page = document.querySelector(".page");
+const results = document.querySelector("[data-results]");
 const audio = document.querySelector("#siski-audio");
 const counter = document.querySelector("[data-count]");
 const popups = document.querySelector("[data-popups]");
@@ -26,12 +27,51 @@ function popup(title, body) {
   setTimeout(() => node.remove(), 2800);
 }
 
+function setMap(lat, lon) {
+  const map = document.querySelector("[data-map]");
+  const delta = 0.12;
+  const left = lon - delta;
+  const right = lon + delta;
+  const top = lat + delta;
+  const bottom = lat - delta;
+  map.src = `https://www.openstreetmap.org/export/embed.html?bbox=${left}%2C${bottom}%2C${right}%2C${top}&layer=mapnik&marker=${lat}%2C${lon}`;
+}
+
+async function fillResults() {
+  const ip = document.querySelector("[data-ip]");
+  const location = document.querySelector("[data-location]");
+  const coords = document.querySelector("[data-coords]");
+
+  ip.textContent = "CHECKING...";
+  location.textContent = "CHECKING...";
+  coords.textContent = "CHECKING...";
+
+  try {
+    const response = await fetch("https://ipapi.co/json/");
+    if (!response.ok) throw new Error("lookup failed");
+    const data = await response.json();
+    const lat = Number(data.latitude);
+    const lon = Number(data.longitude);
+    ip.textContent = data.ip || "UNKNOWN";
+    location.textContent = [data.city, data.region, data.country_name].filter(Boolean).join(", ") || "SISKI ZONE";
+    coords.textContent = Number.isFinite(lat) && Number.isFinite(lon) ? `${lat.toFixed(5)}, ${lon.toFixed(5)}` : "CLASSIFIED";
+    if (Number.isFinite(lat) && Number.isFinite(lon)) setMap(lat, lon);
+  } catch {
+    ip.textContent = "BLOCKED";
+    location.textContent = "SISKI ZONE";
+    coords.textContent = "0.00000, 0.00000";
+    setMap(0, 0);
+  }
+}
+
 async function test(button, red) {
   page.classList.add("testing");
   button.classList.add("testing");
   button.textContent = red ? "↓ RED TESTING" : "↓ TESTING";
   counter.textContent = random(8, 99);
 
+  audio.loop = false;
+  audio.pause();
   audio.currentTime = 0;
   audio.volume = red ? 1 : 0.82;
   try {
@@ -50,6 +90,10 @@ async function test(button, red) {
     page.classList.remove("testing");
     button.classList.remove("testing");
     button.textContent = red ? "↓ YES BUT RED" : "↓ YES";
+    page.hidden = true;
+    results.hidden = false;
+    document.body.classList.add("result-mode");
+    fillResults();
   }, 1500);
 }
 
@@ -57,6 +101,9 @@ document.querySelector("[data-test]").addEventListener("click", (event) => test(
 document.querySelector("[data-test-red]").addEventListener("click", (event) => test(event.currentTarget, true));
 document.querySelector("[data-report]").addEventListener("click", () => {
   popup("REPORT THIS AD", "REPORT DENIED. AD HAS REPORTED YOU.");
+});
+document.querySelector("[data-report-results]").addEventListener("click", () => {
+  popup("RESULT REPORT", "SISKI RESULT CANNOT BE UNSEEN.");
 });
 
 setInterval(() => {
