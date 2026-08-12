@@ -261,7 +261,7 @@ h1 {
 
 .result-card {
   width: min(100%, 1980px);
-  min-height: clamp(210px, 27vw, 275px);
+  min-height: clamp(170px, 20vw, 240px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -270,14 +270,6 @@ h1 {
   border: 4px dashed #ff1919;
   padding: 1rem;
   background: #02024c;
-}
-
-.result-card img {
-  width: clamp(145px, 18vw, 230px);
-  aspect-ratio: 1;
-  object-fit: cover;
-  border: 8px dashed var(--yellow);
-  background: #000;
 }
 
 .result-copy {
@@ -371,13 +363,9 @@ h1 {
     white-space: normal;
   }
 
-  .result-card {
-    flex-direction: column;
-    text-align: center;
-  }
-
   .result-copy {
     font-size: clamp(1.05rem, 5vw, 1.45rem);
+    text-align: center;
   }
 
   .map-wrap {
