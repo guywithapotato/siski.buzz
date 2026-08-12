@@ -1,6 +1,12 @@
 :root {
-  color-scheme: dark;
-  font-family: Impact, "Arial Black", system-ui, sans-serif;
+  color-scheme: light;
+  --cyan: #00ffe5;
+  --pink: #ff20d7;
+  --yellow: #fff200;
+  --green: #00ff16;
+  --red: #ff1717;
+  --black: #000;
+  font-family: "Comic Sans MS", "Comic Sans", "Trebuchet MS", system-ui, sans-serif;
 }
 
 * {
@@ -10,62 +16,256 @@
 html,
 body {
   min-height: 100%;
+  overflow-x: hidden;
 }
 
 body {
   margin: 0;
-  background: #000;
-  overflow: hidden;
-}
-
-html {
-  overflow: hidden;
-}
-
-main {
-  min-height: 100vh;
-  display: grid;
-  place-items: center;
-  padding: 1rem;
-  overflow: hidden;
+  overflow-x: hidden;
+  background:
+    repeating-linear-gradient(
+      45deg,
+      var(--cyan) 0 14px,
+      var(--pink) 14px 27px
+    );
+  animation: stripes 1.2s linear infinite;
 }
 
 button {
-  width: min(820px, 82vw);
-  min-height: min(260px, 42vh);
-  border: 8px outset #fff200;
-  background: linear-gradient(180deg, #ff22cf, #ff0000 55%, #9900ff);
-  color: #fff200;
-  cursor: pointer;
   font: inherit;
-  font-size: clamp(2.6rem, 11vw, 8.5rem);
-  line-height: 0.88;
-  letter-spacing: 0;
+  cursor: pointer;
+}
+
+.page {
+  min-height: 100vh;
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  gap: clamp(0.75rem, 2vw, 1rem);
+  padding: clamp(0.7rem, 3vw, 3.5rem) 0.6rem;
   text-align: center;
+  overflow: hidden;
+}
+
+.warning-bar,
+.trust-bar {
+  width: min(100%, 2040px);
+  background: var(--black);
+  color: var(--green);
+  font-weight: 900;
+  line-height: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-shadow: 2px 2px 0 #003a05;
+}
+
+.warning-bar {
+  padding: 0.72rem;
+  font-size: clamp(1rem, 2.1vw, 1.95rem);
+}
+
+.trust-bar {
+  margin-top: 0.6rem;
+  padding: 0.62rem;
+  font-size: clamp(1.1rem, 2.35vw, 2.35rem);
+}
+
+.warning-bar span,
+.trust-bar span {
+  display: inline-block;
+}
+
+h1 {
+  margin: 0;
+  max-width: min(100%, 1320px);
+  color: var(--yellow);
+  font-family: Impact, "Arial Black", sans-serif;
+  font-size: clamp(2.8rem, 6.2vw, 6.4rem);
+  line-height: 0.92;
+  letter-spacing: 0;
   text-shadow:
-    5px 5px 0 #000,
-    -4px -4px 0 #00ffe5,
-    0 0 28px #fff200;
+    4px 4px 0 #ff0000,
+    7px 7px 0 rgba(0, 0, 0, 0.45),
+    0 0 13px var(--green);
+}
+
+.sponsor {
+  margin: 0;
+  color: var(--yellow);
+  font-size: clamp(0.74rem, 1.05vw, 1rem);
+  font-weight: 900;
+  text-shadow: 1px 1px 0 #f00, 2px 2px 0 rgba(0, 0, 0, 0.35);
+}
+
+.sponsor button {
+  border: 0;
+  background: transparent;
+  color: #0048ff;
+  padding: 0;
+  font-weight: 900;
+  text-decoration: underline;
+}
+
+.ad-box {
+  width: min(740px, calc(100vw - 2rem));
+  display: grid;
+  justify-items: center;
+  gap: 1rem;
+  padding: clamp(1.4rem, 3vw, 2rem) clamp(1rem, 7vw, 10rem) clamp(1rem, 2vw, 1.55rem);
+  border: 3px ridge #c67300;
+  background: #d8d8d8;
   box-shadow:
-    0 0 0 7px #00ffe5,
-    0 0 0 14px #ff22cf,
-    0 0 80px #fff200;
-  transform: rotate(-2deg);
+    16px 16px 0 rgba(0, 0, 0, 0.4),
+    0 0 42px rgba(255, 242, 0, 0.92);
 }
 
-button:hover,
-button:focus-visible {
+.ad-label {
+  margin-bottom: 0.1rem;
+  border: 1px solid #aaa;
+  background: #f7f7f7;
+  color: #333;
+  padding: 0.13rem 0.7rem;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.86rem;
+}
+
+.dingus-button {
+  width: min(405px, 100%);
+  min-height: clamp(4.45rem, 8vw, 5.55rem);
+  border: 3px solid rgba(0, 0, 0, 0.28);
+  border-radius: 8px;
+  color: #fff;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: clamp(1.65rem, 4.2vw, 2.15rem);
+  font-weight: 900;
+  text-shadow:
+    2px 2px 0 rgba(0, 0, 0, 0.5),
+    0 0 4px rgba(255, 255, 255, 0.75);
+  box-shadow:
+    inset 0 3px 0 rgba(255, 255, 255, 0.32),
+    inset 0 -4px 0 rgba(0, 0, 0, 0.24),
+    0 6px 0 rgba(65, 55, 0, 0.82),
+    0 0 24px var(--yellow);
+}
+
+.dingus-button:hover,
+.dingus-button:focus-visible {
   outline: 0;
-  filter: saturate(1.8) contrast(1.25);
-  transform: rotate(2deg) scale(1.04);
+  filter: saturate(1.45) contrast(1.12);
+  transform: scale(1.035);
 }
 
-button.testing {
-  animation: test 120ms infinite;
+.dingus-button:active,
+.dingus-button.testing {
+  transform: translateY(5px) scale(1.01);
+  box-shadow:
+    inset 0 3px 0 rgba(255, 255, 255, 0.2),
+    inset 0 -3px 0 rgba(0, 0, 0, 0.36),
+    0 1px 0 rgba(65, 55, 0, 0.82),
+    0 0 32px var(--yellow);
 }
 
-@keyframes test {
-  0% { transform: translate(8px, -5px) rotate(-3deg) scale(1.04); }
-  50% { transform: translate(-7px, 6px) rotate(3deg) scale(1.08); }
-  100% { transform: translate(4px, 2px) rotate(-1deg) scale(1.03); }
+.blue {
+  background: linear-gradient(#47aaff 0%, #267dde 45%, #0757b9 100%);
+}
+
+.red {
+  background: linear-gradient(#ff474f 0%, #ee121c 48%, #b50000 100%);
+}
+
+.counter {
+  margin: 0.1rem 0 0;
+  color: var(--red);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+  font-weight: 900;
+}
+
+.popup-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5;
+  overflow: hidden;
+}
+
+.popup {
+  position: absolute;
+  left: var(--left);
+  top: var(--top);
+  width: min(280px, calc(100vw - 1rem));
+  border: 3px outset #aaa;
+  background: #ececec;
+  color: #111;
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: left;
+  box-shadow: 7px 7px 0 rgba(0, 0, 0, 0.5);
+  animation: pop 180ms steps(2, end) both;
+}
+
+.popup strong {
+  display: block;
+  padding: 0.35rem 0.5rem;
+  background: linear-gradient(90deg, #00188c, #4c9cff);
+  color: #fff;
+}
+
+.popup p {
+  margin: 0;
+  padding: 0.65rem;
+  font-weight: 900;
+}
+
+.page.testing {
+  animation: none;
+}
+
+.page.testing .ad-box,
+.page.testing h1 {
+  animation: shake 110ms linear 12;
+}
+
+@keyframes stripes {
+  to {
+    background-position: 54px 0;
+  }
+}
+
+@keyframes pop {
+  from {
+    opacity: 0;
+    transform: scale(0.72);
+  }
+}
+
+@keyframes shake {
+  25% { transform: translate(5px, -4px); }
+  50% { transform: translate(-6px, 4px); }
+  75% { transform: translate(3px, 5px); }
+}
+
+@media (max-width: 700px) {
+  .page {
+    justify-content: stretch;
+  }
+
+  .warning-bar,
+  .trust-bar {
+    white-space: normal;
+  }
+
+  .ad-box {
+    width: min(100%, 520px);
+    padding-inline: 1rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
 }
