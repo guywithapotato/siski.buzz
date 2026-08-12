@@ -116,7 +116,7 @@ h1 {
   text-decoration: underline;
 }
 
-.ad-box {
+.siski-box {
   width: min(740px, calc(100vw - 2rem));
   display: grid;
   justify-items: center;
@@ -129,7 +129,7 @@ h1 {
     0 0 42px rgba(255, 242, 0, 0.92);
 }
 
-.ad-label {
+.tiny-tag {
   margin-bottom: 0.1rem;
   border: 1px solid #aaa;
   background: #f7f7f7;
@@ -309,14 +309,14 @@ h1 {
   border: 0;
 }
 
-.footer-ad {
+.footer-note {
   margin: 0;
   color: var(--cyan);
   font-size: 0.78rem;
   text-align: center;
 }
 
-.footer-ad button {
+.footer-note button {
   border: 0;
   background: transparent;
   color: #fff;
@@ -328,7 +328,7 @@ h1 {
   animation: none;
 }
 
-.page.testing .ad-box,
+.page.testing .siski-box,
 .page.testing h1 {
   animation: shake 110ms linear 12;
 }
@@ -362,7 +362,7 @@ h1 {
     white-space: normal;
   }
 
-  .ad-box {
+  .siski-box {
     width: min(100%, 520px);
     padding-inline: 1rem;
   }
