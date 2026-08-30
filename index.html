@@ -1,78 +1,140 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>TEST UR SISKI</title>
-    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="styles.css" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0d6f83">
+    <title>KChat Web Installer</title>
+    <meta name="description" content="Install or update the KChat KOReader plugin on a connected Kobo from your browser.">
+    <meta property="og:title" content="KChat Web Installer">
+    <meta property="og:description" content="Install KChat on a Kobo directly from Chrome or Edge.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://siski.buzz/">
+    <meta property="og:image" content="https://siski.buzz/og.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="KChat Web Installer">
+    <meta name="twitter:description" content="Install KChat on a Kobo directly from Chrome or Edge.">
+    <meta name="twitter:image" content="https://siski.buzz/og.png">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="/styles.css">
+    <script src="/script.js" defer></script>
   </head>
   <body>
-    <audio id="siski-audio" preload="auto" src="assets/siski-test.mp3"></audio>
+    <main class="page-shell">
+      <div class="wrap">
+        <header class="topbar">
+          <div class="brand">
+            <span class="brand-mark" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"/><path d="M8 10h.01M12 10h.01M16 10h.01"/></svg>
+            </span>
+            <span>
+              <strong>KChat Installer</strong>
+              <small>Kobo ↔ Kobo, direct over Wi‑Fi</small>
+            </span>
+          </div>
+          <span class="status-pill" id="support-pill">Checking browser…</span>
+        </header>
 
-    <main class="page" data-home>
-      <div class="warning-bar">
-        <span>⚠ WARNING WARNING YOU HAVE BEEN SELECTED ⚠ CLICK BELOW NOW OR LOSE FOREVER ⚠</span>
-      </div>
+        <section class="layout">
+          <article class="card installer-card">
+            <div class="card-head">
+              <div class="eyebrow-row">
+                <span class="eyebrow">INSTALLER · V0.2</span>
+                <span class="port">PORT 57321</span>
+              </div>
+              <h1>Put KChat on your Kobo in one clean pass.</h1>
+              <p>Connect the Kobo by USB, choose its drive, and this page will verify KOReader before writing the plugin. Existing KChat settings stay untouched.</p>
+            </div>
 
-      <h1>DO YOU WANT TO TEST YOUR SISKI</h1>
+            <div class="card-body">
+              <div class="notice warning hidden" id="unsupported" role="alert">
+                <strong>This browser cannot install directly</strong>
+                <span>Open this page in Chrome or Edge on a computer, or download the plugin and copy it manually.</span>
+              </div>
 
-      <p class="sponsor">
-        Sponsored by SiskiCorp™ | Certified 100% Safe | Ad ID #48291-XZ |
-        <button type="button" data-report>Report this ad</button>
-      </p>
-      <p class="privacy-burp">clicking logs your public IP + approximate location for siski science</p>
+              <ol class="steps" aria-label="Installation steps">
+                <li class="step active" id="step-connect">
+                  <span class="step-number">1</span>
+                  <span><strong>Connect</strong><small>Plug the Kobo into this computer and enter USB storage mode.</small></span>
+                </li>
+                <li class="step" id="step-verify">
+                  <span class="step-number">2</span>
+                  <span><strong>Verify</strong><small>Choose KOBOeReader. The installer checks for KOReader first.</small></span>
+                </li>
+                <li class="step" id="step-install">
+                  <span class="step-number">3</span>
+                  <span><strong>Install</strong><small>Write three small plugin files, then safely eject and restart.</small></span>
+                </li>
+              </ol>
 
-      <section class="siski-box" aria-label="Siski test controls">
-        <div class="tiny-tag">ADVERTISEMENT</div>
+              <div class="notice error hidden" id="error-box" role="alert">
+                <strong>Couldn’t complete that step</strong>
+                <span id="error-text"></span>
+              </div>
 
-        <button class="siski-button blue" type="button" data-test>
-          ↓ TEST UR SISKI RN!!!111!1
-        </button>
+              <section class="device hidden" id="device-card" aria-live="polite">
+                <div class="device-row">
+                  <span class="drive-icon" aria-hidden="true">▣</span>
+                  <span class="device-copy"><strong id="device-name">KOBOeReader</strong><small>.adds/koreader/plugins/kchat.koplugin</small></span>
+                  <span class="found-pill">✓ KOReader found</span>
+                </div>
+                <p class="existing hidden" id="existing-note">KChat is already present. Installing will update its code while keeping saved aliases and peer settings.</p>
+              </section>
 
-        <button class="siski-button red" type="button" data-test-red>
-          ↓ TEST UR SISKI BUT RED
-        </button>
+              <div class="progress-wrap hidden" id="progress-wrap" aria-live="polite">
+                <div class="progress-label"><strong>Installing KChat…</strong><span id="progress-value">0%</span></div>
+                <div class="progress-track"><span id="progress-bar"></span></div>
+              </div>
 
-        <p class="counter">⚠ <span data-count>3</span> PEOPLE TESTED THEIR SISKI IN THE LAST MINUTE ⚠</p>
-      </section>
+              <div class="notice success hidden" id="success-box" role="status">
+                <strong>KChat is installed</strong>
+                <span id="success-text">Safely eject the Kobo, restart KOReader, then open Tools → KChat. Repeat on the second Kobo.</span>
+              </div>
 
-      <div class="trust-bar">
-        <span>100% FREE NO VIRUS TRUSTED BY 9 MILLION USERS</span>
+              <div class="actions">
+                <button class="button primary" id="choose-button" type="button" disabled>
+                  <span aria-hidden="true">▱</span><span id="choose-label">Choose Kobo drive</span>
+                </button>
+                <button class="button secondary hidden" id="install-button" type="button">
+                  <span id="install-label">Install KChat</span><span aria-hidden="true">→</span>
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <aside class="sidebar">
+            <section class="card dark-card">
+              <div class="card-head compact">
+                <div class="side-title"><h2>What gets installed</h2><span aria-hidden="true">⌁</span></div>
+                <p>A tiny KOReader plugin. No account, server, or background service.</p>
+              </div>
+              <div class="card-body compact">
+                <ul class="feature-list">
+                  <li><span>◉</span>Direct Wi‑Fi chat</li>
+                  <li><span>●</span>Custom aliases + visible IPs</li>
+                  <li><span>⌂</span>Local network only</li>
+                </ul>
+                <p class="security-note">Prototype security: messages are plaintext and unauthenticated. Use a trusted Wi‑Fi network.</p>
+              </div>
+            </section>
+
+            <section class="card manual-card">
+              <div class="card-head compact">
+                <h2>Need the manual route?</h2>
+                <p>Download the same plugin package and copy its folder into KOReader yourself.</p>
+              </div>
+              <div class="card-body compact">
+                <a class="button outline full" href="/KChat-prototype.zip" download>↓ Download ZIP</a>
+              </div>
+            </section>
+          </aside>
+        </section>
+
+        <footer>
+          <p>Your files never leave the browser. The installer only writes inside KOReader’s plugin folder.</p>
+          <p class="port">KCHAT/1 · TCP 57321</p>
+        </footer>
       </div>
     </main>
-
-    <main class="results" data-results hidden>
-      <h2>ANALYZING YOUR SISKI...</h2>
-
-      <p class="result-marquee">
-        RESULT: your ip and location have been found below, congratulations on your siski
-      </p>
-
-      <section class="result-card">
-        <div class="result-copy">
-          <p>IP: <span data-ip>CHECKING...</span></p>
-          <p>LOCATION: <span data-location>CHECKING...</span></p>
-          <p>COORDS: <span data-coords>CHECKING...</span></p>
-        </div>
-      </section>
-
-      <section class="map-wrap">
-        <iframe
-          data-map
-          title="Approximate public IP location map"
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"
-        ></iframe>
-      </section>
-
-      <p class="footer-note">
-        Sponsored by SiskiCorp™ | Certified 100% Safe | Ad ID #48291-XZ |
-        <button type="button" data-report-results>Report this ad</button>
-      </p>
-    </main>
-
-    <div class="popup-layer" data-popups aria-live="polite"></div>
-    <script src="script.js"></script>
   </body>
 </html>

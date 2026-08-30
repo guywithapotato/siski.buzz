@@ -1,143 +1,147 @@
-const page = document.querySelector(".page");
-const results = document.querySelector("[data-results]");
-const audio = document.querySelector("#siski-audio");
-const counter = document.querySelector("[data-count]");
-const popups = document.querySelector("[data-popups]");
-const sheetEndpoint = "https://script.google.com/macros/s/AKfycbweGPsOLG7-20IH9GcyZB9RYeAQJ-iQY4_9ewdLMYyGNzIj3o1qL5oB5IMjwXl2kZzz/exec";
+const pluginFiles = ['_meta.lua', 'main.lua', 'kchat_protocol.lua'];
 
-const messages = [
-  "SISKI TEST INITIATED",
-  "SISKI SUBSYSTEM WARM",
-  "YOU ARE SELECTED",
-  "NO VIRUS PROBABLY",
-  "CERTIFIED BUTTON EVENT",
-  "PLEASE KEEP CLICKING",
-];
+const ui = {
+  supportPill: document.querySelector('#support-pill'),
+  unsupported: document.querySelector('#unsupported'),
+  chooseButton: document.querySelector('#choose-button'),
+  chooseLabel: document.querySelector('#choose-label'),
+  installButton: document.querySelector('#install-button'),
+  installLabel: document.querySelector('#install-label'),
+  deviceCard: document.querySelector('#device-card'),
+  deviceName: document.querySelector('#device-name'),
+  existingNote: document.querySelector('#existing-note'),
+  errorBox: document.querySelector('#error-box'),
+  errorText: document.querySelector('#error-text'),
+  progressWrap: document.querySelector('#progress-wrap'),
+  progressValue: document.querySelector('#progress-value'),
+  progressBar: document.querySelector('#progress-bar'),
+  successBox: document.querySelector('#success-box'),
+  successText: document.querySelector('#success-text'),
+  stepConnect: document.querySelector('#step-connect'),
+  stepVerify: document.querySelector('#step-verify'),
+  stepInstall: document.querySelector('#step-install'),
+};
 
-function random(min, max) {
-  return Math.floor(min + Math.random() * (max - min + 1));
+let pluginsDirectory = null;
+let selectedDeviceName = '';
+let existingInstall = false;
+
+function setHidden(element, hidden) {
+  element.classList.toggle('hidden', hidden);
 }
 
-function popup(title, body) {
-  const node = document.createElement("div");
-  node.className = "popup";
-  node.style.setProperty("--left", `${random(8, Math.max(8, window.innerWidth - 300))}px`);
-  node.style.setProperty("--top", `${random(8, Math.max(8, window.innerHeight - 130))}px`);
-  node.innerHTML = `<strong>${title}</strong><p>${body}</p>`;
-  popups.append(node);
-  setTimeout(() => node.remove(), 2800);
+function setProgress(value) {
+  ui.progressValue.textContent = `${value}%`;
+  ui.progressBar.style.width = `${value}%`;
 }
 
-function setMap(lat, lon) {
-  const map = document.querySelector("[data-map]");
-  const delta = 0.12;
-  const left = lon - delta;
-  const right = lon + delta;
-  const top = lat + delta;
-  const bottom = lat - delta;
-  map.src = `https://www.openstreetmap.org/export/embed.html?bbox=${left}%2C${bottom}%2C${right}%2C${top}&layer=mapnik&marker=${lat}%2C${lon}`;
+function clearMessages() {
+  setHidden(ui.errorBox, true);
+  setHidden(ui.successBox, true);
 }
 
-function logSiski(payload) {
-  fetch(sheetEndpoint, {
-    method: "POST",
-    mode: "no-cors",
-    headers: {
-      "Content-Type": "text/plain;charset=utf-8",
-    },
-    body: JSON.stringify({
-      ...payload,
-      userAgent: navigator.userAgent,
-      language: navigator.language,
-      screen: `${window.screen.width}x${window.screen.height}`,
-      at: new Date().toISOString(),
-    }),
-  }).catch(() => {
-    popup("SHEET REFUSED", "THE SISKI WAS TOO POWERFUL TO LOG.");
-  });
+function showError(message) {
+  ui.errorText.textContent = message;
+  setHidden(ui.errorBox, false);
+  setHidden(ui.progressWrap, true);
+  ui.installButton.disabled = false;
+  ui.chooseButton.disabled = false;
 }
 
-async function fillResults(mode) {
-  const ip = document.querySelector("[data-ip]");
-  const location = document.querySelector("[data-location]");
-  const coords = document.querySelector("[data-coords]");
+function setStep(element, state) {
+  element.classList.toggle('active', state === 'active');
+  element.classList.toggle('complete', state === 'complete');
+}
 
-  ip.textContent = "CHECKING...";
-  location.textContent = "CHECKING...";
-  coords.textContent = "CHECKING...";
+async function getKoreaderPlugins(root) {
+  const adds = await root.getDirectoryHandle('.adds');
+  const koreader = await adds.getDirectoryHandle('koreader');
+  return koreader.getDirectoryHandle('plugins');
+}
+
+async function hasExistingKChat(plugins) {
+  try {
+    await plugins.getDirectoryHandle('kchat.koplugin');
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+async function writePluginFile(pluginDirectory, filename) {
+  const response = await fetch(`/plugin/${filename}`, { cache: 'no-store' });
+  if (!response.ok) throw new Error(`Could not download ${filename}.`);
+  const target = await pluginDirectory.getFileHandle(filename, { create: true });
+  const writable = await target.createWritable();
+  await writable.write(await response.blob());
+  await writable.close();
+}
+
+async function chooseKobo() {
+  clearMessages();
+  try {
+    const root = await window.showDirectoryPicker({ id: 'kchat-kobo-drive', mode: 'readwrite' });
+    const plugins = await getKoreaderPlugins(root);
+    existingInstall = await hasExistingKChat(plugins);
+    pluginsDirectory = plugins;
+    selectedDeviceName = root.name;
+
+    ui.deviceName.textContent = selectedDeviceName;
+    ui.chooseLabel.textContent = 'Choose a different Kobo';
+    ui.installLabel.textContent = existingInstall ? 'Update KChat' : 'Install KChat';
+    setHidden(ui.deviceCard, false);
+    setHidden(ui.existingNote, !existingInstall);
+    setHidden(ui.installButton, false);
+    setHidden(ui.progressWrap, true);
+    setProgress(0);
+    setStep(ui.stepConnect, 'complete');
+    setStep(ui.stepVerify, 'active');
+    setStep(ui.stepInstall, 'idle');
+  } catch (error) {
+    if (error instanceof DOMException && error.name === 'AbortError') return;
+    showError('That folder does not look like a Kobo with KOReader installed. Choose the KOBOeReader drive itself, not a folder inside it.');
+  }
+}
+
+async function installKChat() {
+  if (!pluginsDirectory) return;
+  clearMessages();
+  ui.chooseButton.disabled = true;
+  ui.installButton.disabled = true;
+  setHidden(ui.progressWrap, false);
+  setStep(ui.stepVerify, 'complete');
+  setStep(ui.stepInstall, 'active');
+  setProgress(8);
 
   try {
-    const response = await fetch("https://ipapi.co/json/");
-    if (!response.ok) throw new Error("lookup failed");
-    const data = await response.json();
-    const lat = Number(data.latitude);
-    const lon = Number(data.longitude);
-    ip.textContent = data.ip || "UNKNOWN";
-    location.textContent = [data.city, data.region, data.country_name].filter(Boolean).join(", ") || "SISKI ZONE";
-    coords.textContent = Number.isFinite(lat) && Number.isFinite(lon) ? `${lat.toFixed(5)}, ${lon.toFixed(5)}` : "CLASSIFIED";
-    if (Number.isFinite(lat) && Number.isFinite(lon)) setMap(lat, lon);
-    logSiski({
-      mode,
-      ip: ip.textContent,
-      location: location.textContent,
-      coords: coords.textContent,
-    });
-  } catch {
-    ip.textContent = "BLOCKED";
-    location.textContent = "SISKI ZONE";
-    coords.textContent = "0.00000, 0.00000";
-    setMap(0, 0);
-    logSiski({
-      mode,
-      ip: "BLOCKED",
-      location: "SISKI ZONE",
-      coords: "0.00000, 0.00000",
-    });
+    const plugin = await pluginsDirectory.getDirectoryHandle('kchat.koplugin', { create: true });
+    for (let index = 0; index < pluginFiles.length; index += 1) {
+      await writePluginFile(plugin, pluginFiles[index]);
+      setProgress(28 + (index + 1) * 22);
+    }
+
+    const verification = await plugin.getFileHandle('main.lua');
+    const installedMain = await verification.getFile();
+    if (installedMain.size < 1000) throw new Error('The installed file is incomplete.');
+
+    setProgress(100);
+    existingInstall = true;
+    setHidden(ui.progressWrap, true);
+    setHidden(ui.installButton, true);
+    setHidden(ui.existingNote, true);
+    setStep(ui.stepInstall, 'complete');
+    ui.successText.textContent = `Safely eject ${selectedDeviceName}, restart KOReader, then open Tools → KChat. Repeat on the second Kobo.`;
+    setHidden(ui.successBox, false);
+    ui.chooseButton.disabled = false;
+  } catch (error) {
+    showError(error instanceof Error ? error.message : 'The browser could not write to the Kobo. Reconnect it and try again.');
   }
 }
 
-async function test(button, red) {
-  page.classList.add("testing");
-  button.classList.add("testing");
-  button.textContent = red ? "↓ RED SISKI TESTING" : "↓ SISKI TESTING";
-  counter.textContent = random(8, 99);
-
-  audio.loop = false;
-  audio.pause();
-  audio.currentTime = 0;
-  audio.volume = red ? 1 : 0.82;
-  try {
-    await audio.play();
-  } catch {
-    popup("AUDIO BLOCKED", "CLICK AGAIN BUT MEAN IT");
-  }
-
-  for (let i = 0; i < 4; i += 1) {
-    setTimeout(() => {
-      popup(messages[random(0, messages.length - 1)], red ? "RED MODE HAS BEEN APPLIED." : "NORMAL BLUE YES DETECTED.");
-    }, i * 220);
-  }
-
-  setTimeout(() => {
-    page.classList.remove("testing");
-    button.classList.remove("testing");
-    button.textContent = red ? "↓ TEST UR SISKI BUT RED" : "↓ TEST UR SISKI RN!!!111!1";
-    page.hidden = true;
-    results.hidden = false;
-    document.body.classList.add("result-mode");
-    fillResults(red ? "red" : "blue");
-  }, 1500);
-}
-
-document.querySelector("[data-test]").addEventListener("click", (event) => test(event.currentTarget, false));
-document.querySelector("[data-test-red]").addEventListener("click", (event) => test(event.currentTarget, true));
-document.querySelector("[data-report]").addEventListener("click", () => {
-  popup("REPORT THIS AD", "REPORT DENIED. AD HAS REPORTED YOU.");
-});
-document.querySelector("[data-report-results]").addEventListener("click", () => {
-  popup("RESULT REPORT", "SISKI RESULT CANNOT BE UNSEEN.");
-});
-
-setInterval(() => {
-  counter.textContent = random(3, 12);
-}, 2500);
+const supported = typeof window.showDirectoryPicker === 'function';
+ui.chooseButton.disabled = !supported;
+ui.supportPill.textContent = supported ? '✓ Runs locally in your browser' : '⚠ Chrome or Edge required';
+ui.supportPill.classList.toggle('unsupported', !supported);
+setHidden(ui.unsupported, supported);
+ui.chooseButton.addEventListener('click', chooseKobo);
+ui.installButton.addEventListener('click', installKChat);
