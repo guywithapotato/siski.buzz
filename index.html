@@ -3,138 +3,158 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#0d6f83">
-    <title>KChat Web Installer</title>
-    <meta name="description" content="Install or update the KChat KOReader plugin on a connected Kobo from your browser.">
-    <meta property="og:title" content="KChat Web Installer">
-    <meta property="og:description" content="Install KChat on a Kobo directly from Chrome or Edge.">
+    <meta name="theme-color" content="#f1f0e9">
+    <meta name="color-scheme" content="light">
+    <title>siski.buzz — Things for computers</title>
+    <meta name="description" content="The home of projects by Vel: software, tools, experiments, and other things that seemed worth making.">
+    <meta property="og:title" content="siski.buzz — Things for computers">
+    <meta property="og:description" content="Software, tools, experiments, and other things by Vel.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://siski.buzz/">
-    <meta property="og:image" content="https://siski.buzz/og.png">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="KChat Web Installer">
-    <meta name="twitter:description" content="Install KChat on a Kobo directly from Chrome or Edge.">
-    <meta name="twitter:image" content="https://siski.buzz/og.png">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="siski.buzz — Things for computers">
+    <meta name="twitter:description" content="Software, tools, experiments, and other things by Vel.">
+    <link rel="canonical" href="https://siski.buzz/">
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="/styles.css">
-    <script src="/script.js" defer></script>
   </head>
   <body>
-    <main class="page-shell">
-      <div class="wrap">
-        <header class="topbar">
-          <div class="brand">
-            <span class="brand-mark" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"/><path d="M8 10h.01M12 10h.01M16 10h.01"/></svg>
-            </span>
-            <span>
-              <strong>KChat Installer</strong>
-              <small>Kobo ↔ Kobo, direct over Wi‑Fi</small>
-            </span>
-          </div>
-          <span class="status-pill" id="support-pill">Checking browser…</span>
+    <a class="skip-link" href="#main">Skip to the projects</a>
+
+    <header class="site-header">
+      <a class="wordmark" href="#top" aria-label="siski.buzz, home">siski<span>.</span>buzz</a>
+      <nav aria-label="Primary navigation">
+        <a href="#projects">Projects</a>
+        <a href="#about">About</a>
+        <a href="#vel">Vel</a>
+      </nav>
+      <a class="header-link" href="https://github.com/guywithapotato" rel="me">GitHub <span aria-hidden="true">↗</span></a>
+    </header>
+
+    <main id="main">
+      <section class="hero" id="top" aria-labelledby="hero-title">
+        <div class="hero-meta" aria-hidden="true">
+          <span>Independent internet workshop</span>
+          <span>One person / too many tabs</span>
+        </div>
+        <h1 id="hero-title">
+          <span>Things</span>
+          <span>for</span>
+          <span>computers<i>.</i></span>
+        </h1>
+        <div class="hero-foot">
+          <p>siski.buzz is the home of projects by Vel.</p>
+          <p>Software, tools, experiments, and other things that seemed worth making.</p>
+          <a href="#projects" aria-label="Scroll to projects"><span aria-hidden="true">↓</span> See the things</a>
+        </div>
+      </section>
+
+      <section class="projects" id="projects" aria-labelledby="projects-title">
+        <header class="section-head">
+          <p class="kicker">01 / Selected things</p>
+          <h2 id="projects-title">Projects<span>.</span></h2>
+          <p>Finished, unfinished, and occasionally difficult to classify.</p>
         </header>
 
-        <section class="layout">
-          <article class="card installer-card">
-            <div class="card-head">
-              <div class="eyebrow-row">
-                <span class="eyebrow">INSTALLER · V0.2</span>
-                <span class="port">PORT 57321</span>
-              </div>
-              <h1>Put KChat on your Kobo in one clean pass.</h1>
-              <p>Connect the Kobo by USB, choose its drive, and this page will verify KOReader before writing the plugin. Existing KChat settings stay untouched.</p>
-            </div>
+        <div class="project-list">
+          <a class="project-row" href="https://idfk.siski.buzz">
+            <span class="project-number">01</span>
+            <span class="project-name">IDFK</span>
+            <span class="project-description">Small experiments, unfinished ideas, and things that do not need their own name yet.</span>
+            <span class="project-destination">idfk.siski.buzz</span>
+            <span class="project-arrow" aria-hidden="true">↗</span>
+          </a>
 
-            <div class="card-body">
-              <div class="notice warning hidden" id="unsupported" role="alert">
-                <strong>This browser cannot install directly</strong>
-                <span>Open this page in Chrome or Edge on a computer, or download the plugin and copy it manually.</span>
-              </div>
+          <a class="project-row" href="/KChat-prototype.zip" download>
+            <span class="project-number">02</span>
+            <span class="project-name">KChat</span>
+            <span class="project-description">Tiny, direct Kobo-to-Kobo chat for KOReader. No account. No central server.</span>
+            <span class="project-destination">download .zip</span>
+            <span class="project-arrow" aria-hidden="true">↓</span>
+          </a>
 
-              <ol class="steps" aria-label="Installation steps">
-                <li class="step active" id="step-connect">
-                  <span class="step-number">1</span>
-                  <span><strong>Connect</strong><small>Plug the Kobo into this computer and enter USB storage mode.</small></span>
-                </li>
-                <li class="step" id="step-verify">
-                  <span class="step-number">2</span>
-                  <span><strong>Verify</strong><small>Choose KOBOeReader. The installer checks for KOReader first.</small></span>
-                </li>
-                <li class="step" id="step-install">
-                  <span class="step-number">3</span>
-                  <span><strong>Install</strong><small>Write three small plugin files, then safely eject and restart.</small></span>
-                </li>
-              </ol>
+          <a class="project-row" href="https://p2pysay.vercel.app">
+            <span class="project-number">03</span>
+            <span class="project-name">p2pysay</span>
+            <span class="project-description">A peer-to-peer chat experiment that lives in the browser.</span>
+            <span class="project-destination">open project</span>
+            <span class="project-arrow" aria-hidden="true">↗</span>
+          </a>
 
-              <div class="notice error hidden" id="error-box" role="alert">
-                <strong>Couldn’t complete that step</strong>
-                <span id="error-text"></span>
-              </div>
+          <a class="project-row" href="https://github.com/guywithapotato/bad_query">
+            <span class="project-number">04</span>
+            <span class="project-name">bad_query</span>
+            <span class="project-description">An iOS sandbox escape proof of concept, documented in public.</span>
+            <span class="project-destination">source</span>
+            <span class="project-arrow" aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </section>
 
-              <section class="device hidden" id="device-card" aria-live="polite">
-                <div class="device-row">
-                  <span class="drive-icon" aria-hidden="true">▣</span>
-                  <span class="device-copy"><strong id="device-name">KOBOeReader</strong><small>.adds/koreader/plugins/kchat.koplugin</small></span>
-                  <span class="found-pill">✓ KOReader found</span>
-                </div>
-                <p class="existing hidden" id="existing-note">KChat is already present. Installing will update its code while keeping saved aliases and peer settings.</p>
-              </section>
+      <section class="about" id="about" aria-labelledby="about-title">
+        <div class="section-head about-head">
+          <p class="kicker">02 / About</p>
+          <h2 id="about-title">A little corner<br>of the internet<span>.</span></h2>
+        </div>
+        <div class="about-copy">
+          <p class="lead">Some things here are useful. Some are experiments. Some exist because I wanted them to exist.</p>
+          <div class="body-copy">
+            <p>No particular category. No grand plan. If a project grows into its own thing, it gets a subdomain. If it does not, it can stay in the drawer marked <a href="https://idfk.siski.buzz">idfk</a>.</p>
+            <p>This is the index, the workshop door, and the bit of the web that ties it all together.</p>
+          </div>
+        </div>
+        <div class="dot-field" aria-hidden="true">
+          <span></span><span></span><span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span><span></span><span></span><span></span>
+        </div>
+      </section>
 
-              <div class="progress-wrap hidden" id="progress-wrap" aria-live="polite">
-                <div class="progress-label"><strong>Installing KChat…</strong><span id="progress-value">0%</span></div>
-                <div class="progress-track"><span id="progress-bar"></span></div>
-              </div>
+      <section class="domains" aria-labelledby="domains-title">
+        <header class="section-head domains-head">
+          <p class="kicker">03 / The neighbourhood</p>
+          <h2 id="domains-title">Same roof<span>.</span><br>Different doors<span>.</span></h2>
+        </header>
+        <div class="domain-list">
+          <a href="https://idfk.siski.buzz">
+            <span>idfk<span class="accent">.</span>siski.buzz</span>
+            <small>experiments &amp; miscellaneous things</small>
+            <b aria-hidden="true">↗</b>
+          </a>
+          <div>
+            <span>lab<span class="accent">.</span>siski.buzz</span>
+            <small>things that are not ready yet</small>
+            <b aria-hidden="true">•</b>
+          </div>
+          <div>
+            <span>old<span class="accent">.</span>siski.buzz</span>
+            <small>things that used to be ready</small>
+            <b aria-hidden="true">•</b>
+          </div>
+          <div>
+            <span>go<span class="accent">.</span>siski.buzz</span>
+            <small>shortcuts to other places</small>
+            <b aria-hidden="true">•</b>
+          </div>
+        </div>
+      </section>
 
-              <div class="notice success hidden" id="success-box" role="status">
-                <strong>KChat is installed</strong>
-                <span id="success-text">Safely eject the Kobo, restart KOReader, then open Tools → KChat. Repeat on the second Kobo.</span>
-              </div>
-
-              <div class="actions">
-                <button class="button primary" id="choose-button" type="button" disabled>
-                  <span aria-hidden="true">▱</span><span id="choose-label">Choose Kobo drive</span>
-                </button>
-                <button class="button secondary hidden" id="install-button" type="button">
-                  <span id="install-label">Install KChat</span><span aria-hidden="true">→</span>
-                </button>
-              </div>
-            </div>
-          </article>
-
-          <aside class="sidebar">
-            <section class="card dark-card">
-              <div class="card-head compact">
-                <div class="side-title"><h2>What gets installed</h2><span aria-hidden="true">⌁</span></div>
-                <p>A tiny KOReader plugin. No account, server, or background service.</p>
-              </div>
-              <div class="card-body compact">
-                <ul class="feature-list">
-                  <li><span>◉</span>Direct Wi‑Fi chat</li>
-                  <li><span>●</span>Custom aliases + visible IPs</li>
-                  <li><span>⌂</span>Local network only</li>
-                </ul>
-                <p class="security-note">Prototype security: messages are plaintext and unauthenticated. Use a trusted Wi‑Fi network.</p>
-              </div>
-            </section>
-
-            <section class="card manual-card">
-              <div class="card-head compact">
-                <h2>Need the manual route?</h2>
-                <p>Download the same plugin package and copy its folder into KOReader yourself.</p>
-              </div>
-              <div class="card-body compact">
-                <a class="button outline full" href="/KChat-prototype.zip" download>↓ Download ZIP</a>
-              </div>
-            </section>
-          </aside>
-        </section>
-
-        <footer>
-          <p>Your files never leave the browser. The installer only writes inside KOReader’s plugin folder.</p>
-          <p class="port">KCHAT/1 · TCP 57321</p>
-        </footer>
-      </div>
+      <section class="vel" id="vel" aria-labelledby="vel-title">
+        <div>
+          <p class="kicker">04 / Person responsible</p>
+          <h2 id="vel-title">Vel<span>.</span></h2>
+        </div>
+        <p class="vel-intro">Developer, tinkerer, and person who has to fix it when it breaks.</p>
+        <a class="big-link" href="https://github.com/guywithapotato" rel="me">
+          <span>Find me on GitHub</span>
+          <span aria-hidden="true">↗</span>
+        </a>
+      </section>
     </main>
+
+    <footer class="site-footer">
+      <a class="wordmark footer-mark" href="#top">siski<span>.</span>buzz</a>
+      <p>Made by Vel <span aria-hidden="true">•</span> 2026</p>
+      <p>You reached the bottom. There is nothing else down here<span class="accent">.</span></p>
+    </footer>
   </body>
 </html>

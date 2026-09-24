@@ -1,7 +1,11 @@
-# KChat Web Installer
+# siski.buzz
 
-This repository powers [siski.buzz](https://siski.buzz/), a browser installer for the KChat KOReader plugin.
+The home of projects by Vel: software, tools, experiments, and other things that seemed worth making.
 
-Open the site in desktop Chrome or Edge, connect a Kobo by USB, choose the `KOBOeReader` drive, and install. The page writes only the three KChat plugin files inside `.adds/koreader/plugins/kchat.koplugin`.
+This is a deliberately small, dependency-free static site served through GitHub Pages at [siski.buzz](https://siski.buzz/).
 
-KChat is an early LAN-only prototype. Messages are plaintext and unauthenticated; use a trusted Wi-Fi network.
+## Local preview
+
+Serve the repository root with any static file server, then open the local URL in a browser.
+
+The custom domain is configured by `CNAME`. Keep that file and `.nojekyll` in the repository root.
